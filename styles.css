@@ -1,3 +1,12 @@
+p {
+    margin:0px;
+    margin-bottom:30px;
+    background-color: black;
+    color: white;
+    padding:4px;
+    text-align: center;
+}
+
 #calculator {
     display: flex;
     flex-direction: column;
@@ -7,7 +16,7 @@
 #calculatorbody{
     background-color: dimgray;
     border-radius: 39px;
-    padding: 39px;
+    padding: 29px;
     border-width: 2px;
     border-style: solid;
 }
@@ -20,6 +29,7 @@
     border-color: black;
     border-style: solid;
     border-width: 2px;
+    height:20px;
 }
 
 button{
