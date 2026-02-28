@@ -89,7 +89,7 @@ function calculate(){
     let a = Number(leftNum);
     let b = Number(rightNum);
     console.log("evaluating "+a + operator + b );
-    if (b === 0 && operator === "/"){leftNum = "OOPS!!!"; operator = rightNum = ""; updateDisplay(); return;}//division by 0
+    if (b === 0 && operator === "/"){leftNum = "Nice try."; operator = rightNum = ""; updateDisplay(); return;}//division by 0
     let result = operate(a, operator, b);
     leftNum = String(+(result.toFixed(5)));
     //clear non-result, update display
