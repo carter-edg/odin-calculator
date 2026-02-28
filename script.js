@@ -33,6 +33,7 @@ function operate(left, operator, right){
 
 //grabs screen item for display updates.
 const screen = document.querySelector("#screen");
+const dotButton = document.querySelector("#buttondot");
 
 //gets all buttons and adds appropriate events to them.
 let numpadButtons = [...document.querySelectorAll("#numpad button")];
@@ -61,7 +62,8 @@ function numpadButtonClicked(value){
     calculatedNumber = false; //
     console.log(value);
     if (operator === ""){//determine whether editing left number or right number
-        if (Number.isNaN(Number(leftNum))){leftNum = "";updateDisplay();}//clears error if there was
+        if (leftNum !== "." && Number.isNaN(Number(leftNum))){leftNum = "";updateDisplay();}//clears error if there was
+        if (value === "."){dotButton.disabled = true;}
         leftNum+=value;//held as string
     }else{
         rightNum+=value;//held as string
@@ -72,6 +74,7 @@ function numpadButtonClicked(value){
 //event when a button in the operators section is clicked.
 function operatorButtonClicked(value){
     calculatedNumber = false;
+    dotButton.disabled = false;
     console.log(value);
     if (value === "="){
         calculatedNumber = true;
@@ -91,6 +94,8 @@ function operatorButtonClicked(value){
 //performs the = operator, clears display.
 function calculate(){
     if (rightNum === ""){leftNum = "OOPS!!!"; operator = ""; updateDisplay(); return;}//error check
+    if (leftNum === "."){leftNum = "0";}//error check
+    if (rightNum === "."){rightNum = "0";}//error check
     //leftNum and rightNum are stored as strings.
     let a = Number(leftNum);
     let b = Number(rightNum);
