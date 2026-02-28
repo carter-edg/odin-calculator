@@ -50,8 +50,7 @@ operatorButtons.forEach((operatorButton)=>{
 
 //updates the screen.
 function updateDisplay(){
-    const leftNumDisplay = +(+leftNum).toFixed(5);//displays as a 5 digit(max) float
-    screen.textContent = leftNumDisplay + operator + rightNum;
+    screen.textContent = leftNum + operator + rightNum;
 }
 
 //event when a button in the numpad is clicked. 
@@ -75,6 +74,9 @@ function operatorButtonClicked(value){
         leftNum = operator = rightNum = "";
         updateDisplay();
     }else{ //+,-,*,/ operators
+        if (operator !== "" && rightNum !== ""){//don't evaluate more than one pair of numbers
+            calculate();
+        }
         operator = value;
         updateDisplay();
     }
@@ -86,6 +88,8 @@ function calculate(){
     //leftNum and rightNum are stored as strings.
     let a = Number(leftNum);
     let b = Number(rightNum);
+    console.log("evaluating "+a + operator + b );
+    if (b === 0 && operator === "/"){leftNum = "OOPS!!!"; operator = rightNum = ""; updateDisplay(); return;}//division by 0
     let result = operate(a, operator, b);
     leftNum = String(+(result.toFixed(5)));
     //clear non-result, update display
