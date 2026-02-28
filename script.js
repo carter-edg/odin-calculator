@@ -19,11 +19,11 @@ function divide(a,b){
 }
 
 function operate(left, operator, right){
-    if (operator === "add"){return add(left,right);}
-    if (operator === "subtract"){return subtract(left,right);}
-    if (operator === "multiply"){return multiply(left,right);}
-    if (operator === "divide"){return divide(left,right);}
-    else{return NaN;}
+    if (operator === "+"){return add(left,right);}
+    if (operator === "-"){return subtract(left,right);}
+    if (operator === "*"){return multiply(left,right);}
+    if (operator === "/"){return divide(left,right);}
+    else{return "OOPS!!!";}
 }
 
 const screen = document.querySelector("#screen");
@@ -58,4 +58,23 @@ function numpadButtonClicked(value){
 
 function operatorButtonClicked(value){
     console.log(value);
+    if (value === "="){
+        calculate();
+    }else if (value === "c"){
+        leftNum = operator = rightNum = "";
+        updateDisplay();
+    }else{
+        operator = value;
+        updateDisplay();
+    }
+}
+
+//performs the = operator, clears display.
+function calculate(){
+    let a = Number(leftNum);
+    let b = Number(rightNum);
+    let result = operate(a, operator, b);
+    leftNum = String(result);
+    operator = rightNum = "";
+    updateDisplay();
 }
