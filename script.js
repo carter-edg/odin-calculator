@@ -1,7 +1,7 @@
 let leftNum  = "";
 let rightNum = "";
 let operator = "";
-
+let calculatedNumber = false;
 //add two numbers
 function add(a, b){
     return a + b;
@@ -55,6 +55,10 @@ function updateDisplay(){
 
 //event when a button in the numpad is clicked. 
 function numpadButtonClicked(value){
+    if (calculatedNumber === true){ //overwrite answer if last input was to calculate answer.
+        leftNum = "";
+    }
+    calculatedNumber = false; //
     console.log(value);
     if (operator === ""){//determine whether editing left number or right number
         if (Number.isNaN(Number(leftNum))){leftNum = "";updateDisplay();}//clears error if there was
@@ -67,8 +71,10 @@ function numpadButtonClicked(value){
 
 //event when a button in the operators section is clicked.
 function operatorButtonClicked(value){
+    calculatedNumber = false;
     console.log(value);
     if (value === "="){
+        calculatedNumber = true;
         calculate();
     }else if (value === "c"){
         leftNum = operator = rightNum = "";
